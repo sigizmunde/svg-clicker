@@ -12,7 +12,7 @@ class PalletteArchive {
   }
 
   addOnePallette({ palletteName, colorNumArr }) {
-    if (!this.palletteArr.find((a) => (a.palletteName = palletteName))) {
+    if (!this.palletteArr.find((a) => a.palletteName === palletteName)) {
       this.palletteArr.push({ palletteName, colorNumArr });
       return 1;
     } else return null;
