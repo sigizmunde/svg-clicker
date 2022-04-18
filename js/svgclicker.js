@@ -58,11 +58,14 @@ class PalletteArchive {
         }) - 12px); height: 24px; border-radius: 4px;`;
         colorUl.append(colorLi);
       }
-      return colorUl;
+      const nameP = document.createElement("p");
+      nameP.classList.add("pallette-name");
+      nameP.innerText = currentPallette.palletteName;
+      return [colorUl, nameP];
     } else {
       const errorStatement = document.createElement("p");
       errorStatement.innerText = "No pallette found.";
-      return errorStatement;
+      return [errorStatement];
     }
   }
 
@@ -175,14 +178,16 @@ const refs = {
   body: document.querySelector("body"),
   svgimage: document.getElementById("patternsvg"),
   loaderContainer: document.querySelector(".loader-container"),
+
   colorPanel: document.querySelector(".color-menu"),
-  colorMenu: null,
   minimizeBtn: document.querySelector(".js-minimize-btn"),
   colorListBtn: document.querySelector(".js-color-list-btn"),
+  currentColor: document.querySelector(".js-current-color"),
+  colorMenu: null,
 };
 
 const val = {
-  curColor: "#aaaaaa",
+  curColor: "#ffffff",
 };
 
 refs.svgimage.addEventListener("load", function () {
@@ -195,27 +200,25 @@ const myColors = new PalletteArchive();
 myColors.addPallettes(colorSchemesArr);
 
 refs.colorMenu = myColors.generatePalletteMarkup(0);
-refs.colorPanel.append(refs.colorMenu);
-for (const colorBox of refs.colorMenu.children) {
+refs.colorPanel.append(...refs.colorMenu);
+for (const colorBox of refs.colorMenu[0].children) {
   colorBox.addEventListener("click", onColorClick);
 }
-refs.colorPanel.querySelector(".pallette-name").innerText =
-  myColors.palletteArr[0].palletteName;
+setCurrentColor(refs.colorMenu[0].children[0].style.backgroundColor);
+
+function setCurrentColor(colorString) {
+  val.curColor = colorString;
+  refs.currentColor.style.backgroundColor = colorString;
+}
 
 function addSvgListeners(objectEl) {
   console.log("addSvgListeners");
 
-  //   const myLoader = new SimpleLoader(refs.loaderContainer);
-  //   myLoader.initLoader();
-  //   refs.loaderContainer.classList.remove("is-hidden");
   let svgDoc = objectEl.contentDocument;
   let els = svgDoc.querySelectorAll("path");
-  for (let i = 0, length = els.length; i < length; i++) {
-    els[i].addEventListener("click", onPatternClick);
-    // myLoader.updateLoader(i, els.length);
+  for (const el of els) {
+    el.addEventListener("click", onPatternClick);
   }
-  //   myLoader.removeLoader();
-  //   refs.loaderContainer.classList.add("is-hidden");
 }
 
 function onPatternClick(event) {
@@ -224,7 +227,7 @@ function onPatternClick(event) {
 }
 
 function onColorClick(event) {
-  val.curColor = event.target.style.backgroundColor;
+  setCurrentColor(event.target.style.backgroundColor);
 }
 
 function onClick(event) {
