@@ -46,16 +46,18 @@ class PalletteArchive {
     if (currentPallette) {
       const colorUl = document.createElement("ul");
       colorUl.classList.add("js-color-pallette");
-      colorUl.style =
-        "display: flex; margin-left: -12px; background-color: white; padding: 0; list-style: none;";
+      // colorUl.style =
+      //   "display: flex; margin-left: -12px; background-color: white; padding: 0; list-style: none;";
       for (const colorNum of currentPallette.colorNumArr) {
         const colorLi = document.createElement("li");
         colorLi.classList.add("js-color-box");
-        colorLi.style = `display: block; margin-left: 12px; background-color: #${colorNum
+        colorLi.style = `background-color: #${colorNum
           .toString(16)
-          .padStart(6, "0")}; padding: 0; width: calc((100% / ${
+          .padStart(6, "0")}; --color-box-width: calc((100% / ${
           currentPallette.colorNumArr.length
-        }) - 12px); height: 24px; border-radius: 4px;`;
+        }) - 12px); --color-box-height: calc((120px / ${
+          currentPallette.colorNumArr.length
+        }) - 5px);`;
         colorUl.append(colorLi);
       }
       const nameP = document.createElement("p");
@@ -206,19 +208,25 @@ for (const colorBox of refs.colorMenu[0].children) {
 }
 setCurrentColor(refs.colorMenu[0].children[0].style.backgroundColor);
 
+refs.minimizeBtn.addEventListener("click", onMinimizeBtnClick);
+
+// =========== functions ============
+
 function setCurrentColor(colorString) {
   val.curColor = colorString;
   refs.currentColor.style.backgroundColor = colorString;
 }
 
 function addSvgListeners(objectEl) {
-  console.log("addSvgListeners");
+  console.log("adding SVG listeners...");
 
   let svgDoc = objectEl.contentDocument;
   let els = svgDoc.querySelectorAll("path");
   for (const el of els) {
     el.addEventListener("click", onPatternClick);
   }
+
+  console.log("...done");
 }
 
 function onPatternClick(event) {
@@ -232,6 +240,11 @@ function onColorClick(event) {
 
 function onClick(event) {
   console.log(event.target, event.currentTarget);
+}
+
+function onMinimizeBtnClick(event) {
+  event.target.parentElement.classList.toggle("minimized");
+  event.target.innerText = event.target.innerText === "<" ? ">" : "<";
 }
 
 function sleep(milliseconds) {
