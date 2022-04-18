@@ -1,80 +1,3 @@
-const colorSchemesArr = [
-  {
-    palletteName: "cold violet",
-    colorNumArr: [0x56b6c4, 0x9567e0, 0x6f3096, 0x06114f, 0xf7a579],
-  },
-  {
-    palletteName: "purple sunrise",
-    colorNumArr: [0xf89f5b, 0xe53f71, 0x9c3587, 0x653780, 0x3f1651],
-  },
-  {
-    palletteName: "vivid and bright",
-    colorNumArr: [
-      0x017aff, 0xf96300, 0xf5c900, 0x6c47ff, 0xf34971, 0xcdad7a, 0x39c0c8,
-      0xff9382, 0xaabb5d,
-    ],
-  },
-  {
-    palletteName: "colors of 1980s",
-    colorNumArr: [0xfe68a8, 0x3869c8, 0x4fdddf, 0xffda58, 0xcf95fb],
-  },
-  {
-    palletteName: "perfect storm",
-    colorNumArr: [0xb8d8d8, 0x7a9e9f, 0x4f6367, 0xeef5db, 0xfe5f55],
-  },
-];
-
-const refs = {
-  body: document.querySelector("body"),
-  svgimage: document.getElementById("patternsvg"),
-  loaderContainer: document.querySelector(".loader-container"),
-  colorPanel: document.querySelector(".color-menu"),
-};
-
-// refs.body.addEventListener("click", addSvgListeners);
-
-const myColors = new PalletteArchive();
-myColors.addPallettes(colorSchemesArr);
-
-refs.colorPanel.append(myColors.generatePalletteMarkup("cold violet"));
-
-refs.svgimage.addEventListener("load", function () {
-  addSvgListeners(refs.svgimage);
-});
-
-function addSvgListeners(objectEl) {
-  console.log("addSvgListeners");
-
-  //   const myLoader = new SimpleLoader(refs.loaderContainer);
-  //   myLoader.initLoader();
-  //   refs.loaderContainer.classList.remove("is-hidden");
-  let svgDoc = objectEl.contentDocument;
-  let els = svgDoc.querySelectorAll("path");
-  for (let i = 0, length = els.length; i < length; i++) {
-    els[i].addEventListener("click", onPatternClick);
-    // myLoader.updateLoader(i, els.length);
-  }
-  //   myLoader.removeLoader();
-  //   refs.loaderContainer.classList.add("is-hidden");
-}
-
-function onPatternClick(event) {
-  console.log("onPatternClick", `target ${event.target}`);
-  event.target.style.fill = "#FF8888";
-}
-
-function onClick(event) {
-  console.log(event.target, event.currentTarget);
-}
-
-function sleep(milliseconds) {
-  const date = Date.now();
-  let currentDate = null;
-  do {
-    currentDate = Date.now();
-  } while (currentDate - date < milliseconds);
-}
-
 // ========================= pallette class start ====================
 class PalletteArchive {
   constructor() {
@@ -89,8 +12,8 @@ class PalletteArchive {
   }
 
   addOnePallette({ palletteName, colorNumArr }) {
-    if (this.palletteArr.find((a) => (a.palletteName = palletteName))) {
-      this.palletteArr.push(newPallete);
+    if (!this.palletteArr.find((a) => (a.palletteName = palletteName))) {
+      this.palletteArr.push({ palletteName, colorNumArr });
       return 1;
     } else return null;
   }
@@ -109,10 +32,16 @@ class PalletteArchive {
     //generates new pallette from library colors
   }
 
-  generatePalletteMarkup(palletteName) {
-    const currentPallette = this.palletteArr.find(
-      (a) => (a.palletteName = palletteName)
-    );
+  generatePalletteMarkup(palletteRef) {
+    let currentPallette = null;
+
+    if (typeof palletteRef === "string") {
+      currentPallette = this.palletteArr.find(
+        (a) => (a.palletteName = palletteName)
+      );
+    } else if (typeof palletteRef === "number" && palletteRef > -1) {
+      currentPallette = this.palletteArr[palletteRef];
+    }
 
     if (currentPallette) {
       const colorUl = document.createElement("ul");
@@ -121,12 +50,12 @@ class PalletteArchive {
         "display: flex; margin-left: -12px; background-color: white; padding: 0; list-style: none;";
       for (const colorNum of currentPallette.colorNumArr) {
         const colorLi = document.createElement("li");
-        colorLi.classList.add("js-color");
-        colorLi.style = `display: block; margin-left: 12px; background-color: #${colorNum.toString(
-          16
-        )}; padding: 0; width: calc((100% / ${
+        colorLi.classList.add("js-color-box");
+        colorLi.style = `display: block; margin-left: 12px; background-color: #${colorNum
+          .toString(16)
+          .padStart(6, "0")}; padding: 0; width: calc((100% / ${
           currentPallette.colorNumArr.length
-        }) - 12px)`;
+        }) - 12px); height: 24px; border-radius: 4px;`;
         colorUl.append(colorLi);
       }
       return colorUl;
@@ -215,3 +144,97 @@ class SimpleLoader {
   }
 }
 // ========================= loader class end ========================
+
+const colorSchemesArr = [
+  {
+    palletteName: "cold violet",
+    colorNumArr: [0x56b6c4, 0x9567e0, 0x6f3096, 0x06114f, 0xf7a579],
+  },
+  {
+    palletteName: "purple sunrise",
+    colorNumArr: [0xf89f5b, 0xe53f71, 0x9c3587, 0x653780, 0x3f1651],
+  },
+  {
+    palletteName: "vivid and bright",
+    colorNumArr: [
+      0x017aff, 0xf96300, 0xf5c900, 0x6c47ff, 0xf34971, 0xcdad7a, 0x39c0c8,
+      0xff9382, 0xaabb5d,
+    ],
+  },
+  {
+    palletteName: "colors of 1980s",
+    colorNumArr: [0xfe68a8, 0x3869c8, 0x4fdddf, 0xffda58, 0xcf95fb],
+  },
+  {
+    palletteName: "perfect storm",
+    colorNumArr: [0xb8d8d8, 0x7a9e9f, 0x4f6367, 0xeef5db, 0xfe5f55],
+  },
+];
+
+const refs = {
+  body: document.querySelector("body"),
+  svgimage: document.getElementById("patternsvg"),
+  loaderContainer: document.querySelector(".loader-container"),
+  colorPanel: document.querySelector(".color-menu"),
+  colorMenu: null,
+  minimizeBtn: document.querySelector(".js-minimize-btn"),
+  colorListBtn: document.querySelector(".js-color-list-btn"),
+};
+
+const val = {
+  curColor: "#aaaaaa",
+};
+
+refs.svgimage.addEventListener("load", function () {
+  addSvgListeners(refs.svgimage);
+});
+
+// refs.body.addEventListener("click", addSvgListeners);
+
+const myColors = new PalletteArchive();
+myColors.addPallettes(colorSchemesArr);
+
+refs.colorMenu = myColors.generatePalletteMarkup(0);
+refs.colorPanel.append(refs.colorMenu);
+for (const colorBox of refs.colorMenu.children) {
+  colorBox.addEventListener("click", onColorClick);
+}
+refs.colorPanel.querySelector(".pallette-name").innerText =
+  myColors.palletteArr[0].palletteName;
+
+function addSvgListeners(objectEl) {
+  console.log("addSvgListeners");
+
+  //   const myLoader = new SimpleLoader(refs.loaderContainer);
+  //   myLoader.initLoader();
+  //   refs.loaderContainer.classList.remove("is-hidden");
+  let svgDoc = objectEl.contentDocument;
+  let els = svgDoc.querySelectorAll("path");
+  for (let i = 0, length = els.length; i < length; i++) {
+    els[i].addEventListener("click", onPatternClick);
+    // myLoader.updateLoader(i, els.length);
+  }
+  //   myLoader.removeLoader();
+  //   refs.loaderContainer.classList.add("is-hidden");
+}
+
+function onPatternClick(event) {
+  console.log("onPatternClick", `target ${event.target}`);
+  event.target.style.fill = val.curColor;
+}
+
+function onColorClick(event) {
+  val.curColor = event.target.style.backgroundColor;
+}
+
+function onClick(event) {
+  console.log(event.target, event.currentTarget);
+}
+
+function sleep(milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
+}

@@ -105,10 +105,8 @@ body {
   z-index: 1;
 }
 
-.minimize-btn {
+.menu-btn {
   position: absolute;
-  top: 8px;
-  right: 8px;
   display: block;
   width: 32px;
   height: 32px;
@@ -122,14 +120,24 @@ body {
   font-size: 12px;
 }
 
+.js-minimize-btn {
+  top: 8px;
+  right: 8px;
+}
+
+.js-color-list-btn {
+  top: 8px;
+  right: 48px;
+}
+
 .color-menu {
   position: fixed;
   z-index: 99;
 
   width: 25%;
-  height: 150px;
+  height: auto;
 
-  padding: 50px;
+  padding: 42px;
 
   left: 12px;
   top: 12px;
@@ -138,6 +146,14 @@ body {
   text-align: center;
 
   border-radius: 12px;
+}
+
+.pallette-name {
+  margin-bottom: 12px;
+
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 12px;
 }
 
 .loader-container {
