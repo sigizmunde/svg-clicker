@@ -45,62 +45,6 @@ body {
   padding: 0;
 }
 
-/* ======================= utility ====================================== */
-
-.visually-hidden {
-  position: absolute;
-  white-space: nowrap;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  border: 0;
-  padding: 0;
-  clip: rect(0 0 0 0);
-  -webkit-clip-path: inset(50%);
-  clip-path: inset(50%);
-  margin: -1px;
-}
-
-.is-hidden {
-  visibility: visible;
-  opacity: 0;
-  pointer-events: none;
-  -webkit-transform: scale(150%);
-  transform: scale(150%);
-}
-
-.backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
-  -webkit-transition: opacity 250ms linear, -webkit-transform 250ms ease-in-out;
-  transition: opacity 250ms linear, -webkit-transform 250ms ease-in-out;
-  transition: opacity 250ms linear, transform 250ms ease-in-out;
-  transition: opacity 250ms linear, transform 250ms ease-in-out,
-    -webkit-transform 250ms ease-in-out;
-}
-
-.modal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  width: 94%;
-  max-width: 450px;
-  padding: 40px;
-  color: var(--main-text-color);
-  background-color: var(--main-bg-color);
-  border-radius: 4px;
-  -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12),
-    0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
-    0px 2px 1px rgba(0, 0, 0, 0.2);
-}
-
 /* ======================= document styles ========================== */
 
 .image-container {
@@ -142,7 +86,7 @@ body {
   height: 48px;
   padding: 8px;
   border-radius: 12px;
-  box-shadow: 2px 2px 10px 0px var(--color-accent);
+  box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.5);
   transform: translate(25%, 25%);
 }
 
@@ -163,6 +107,9 @@ body {
   text-align: center;
 
   border-radius: 12px;
+
+  -webkit-transition: all 125ms linear;
+  transition: all 125ms linear;
 }
 
 .color-menu__header {
@@ -260,21 +207,93 @@ body {
   border-radius: 4px;
 }
 
-.loader-container {
-  position: fixed;
-  z-index: 99;
-
+.menu-container {
   width: 25%;
-  height: 150px;
 
-  padding: 50px;
-
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  padding: 50px 25px;
 
   background-color: white;
   text-align: center;
 
   border-radius: 12px;
+}
+
+.pallette-menu__header {
+  display: block;
+  margin-bottom: 16px;
+  text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 16px;
+  color: var(--color-accent);
+}
+
+/* ======================= utility ====================================== */
+
+.link {
+  color: var(--color-strong);
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.link:hover,
+.link:active,
+.link:focus {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.visually-hidden {
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(50%);
+  clip-path: inset(50%);
+  margin: -1px;
+}
+
+.is-hidden {
+  visibility: visible;
+  opacity: 0;
+  pointer-events: none;
+  -webkit-transform: scale(150%);
+  transform: scale(150%);
+}
+
+.backdrop {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-transition: opacity 125ms linear, -webkit-transform 125ms ease-in-out;
+  transition: opacity 125ms linear, -webkit-transform 125ms ease-in-out;
+  transition: opacity 125ms linear, transform 125ms ease-in-out;
+  transition: opacity 125ms linear, transform 125ms ease-in-out,
+    -webkit-transform 125ms ease-in-out;
+}
+
+.modal {
+  position: fixed;
+  z-index: 101;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  max-width: 94%;
+  -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12),
+    0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  -webkit-transition: opacity 125ms linear, -webkit-transform 125ms ease-in-out;
+  transition: opacity 125ms linear, -webkit-transform 125ms ease-in-out;
+  transition: opacity 125ms linear, transform 125ms ease-in-out;
+  transition: opacity 125ms linear, transform 125ms ease-in-out,
+    -webkit-transform 125ms ease-in-out;
 }
