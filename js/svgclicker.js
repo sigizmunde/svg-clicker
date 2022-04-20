@@ -1,4 +1,5 @@
 import { PalletteArchive } from "./classes/pallette.js";
+import { MouseTool } from "./classes/mousetools.js";
 
 const colorSchemesArr = [
   {
@@ -36,6 +37,9 @@ const refs = {
   menuContainer: document.querySelector(".menu-container"),
   backdrop: document.querySelector(".backdrop"),
 
+  groupBtn: document.querySelector(".js-group-tool-btn"),
+  hoverBtn: document.querySelector(".js-hover-tool-btn"),
+
   colorPanel: document.querySelector(".color-menu"),
   minimizeBtn: document.querySelector(".js-minimize-btn"),
   colorListBtn: document.querySelector(".js-color-list-btn"),
@@ -43,9 +47,11 @@ const refs = {
   colorMenu: null,
 };
 
-const val = {
-  curColor: "#ffffff",
-};
+const controller = new MouseTool(refs.groupBtn, refs.hoverBtn);
+
+// const val = {
+//   curColor: "#ffffff",
+// };
 
 addSvgListeners(refs.svgimage);
 
@@ -70,7 +76,7 @@ refs.backdrop.addEventListener("click", hideModal);
 // =========== functions ============
 
 function setCurrentColor(colorString) {
-  val.curColor = colorString;
+  controller.currentColor = colorString;
   refs.currentColor.style.backgroundColor = colorString;
 }
 
@@ -78,18 +84,19 @@ function addSvgListeners(objectEl) {
   console.log("adding SVG listeners...");
 
   let svgDoc = objectEl.contentDocument;
-  let els = svgDoc.querySelectorAll("path");
+  let els = svgDoc.querySelectorAll("g:not(#svg-back)");
   for (const el of els) {
-    el.addEventListener("click", onPatternClick);
+    el.addEventListener("click", (event) => controller.leftClick(event));
+    // cause callback has no this so function inside function needed
+    console.log("g");
   }
-  val.readyToWork = true;
   console.log("...done");
 }
 
-function onPatternClick(event) {
-  console.log("onPatternClick", `target ${event.target}`);
-  event.target.style.fill = val.curColor;
-}
+// function onPatternClick(event) {
+//   console.log("onPatternClick", `target ${event.target}`);
+//   event.target.style.fill = val.curColor;
+// }
 
 function onColorClick(event) {
   setCurrentColor(event.target.style.backgroundColor);

@@ -67,6 +67,17 @@ body {
   cursor: pointer;
 }
 
+.menu-btn.menu-btn__static {
+  position: static;
+  margin-top: 8px;
+}
+
+.menu-btn.is-active {
+  border: 1.5px solid var(--color-accent);
+  background-color: var(--color-accent);
+  color: white;
+}
+
 .js-minimize-btn {
   top: 12px;
   right: 14px;
@@ -205,6 +216,27 @@ body {
   width: auto;
   height: var(--color-box-height);
   border-radius: 4px;
+}
+
+.tools-menu {
+  position: fixed;
+  z-index: 99;
+
+  width: 48px;
+  height: auto;
+
+  padding: 8px;
+
+  right: 8px;
+  top: 12px;
+
+  background-color: white;
+  text-align: center;
+
+  border-radius: 12px;
+
+  -webkit-transition: all 125ms linear;
+  transition: all 125ms linear;
 }
 
 .menu-container {
