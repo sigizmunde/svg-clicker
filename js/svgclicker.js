@@ -88,7 +88,7 @@ function addSvgListeners(objectEl) {
   for (const el of els) {
     el.addEventListener("click", (event) => controller.leftClick(event));
     // cause callback has no this so function inside function needed
-    console.log("g");
+    console.log("found <g> element");
   }
   console.log("...done");
 }
