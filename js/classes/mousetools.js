@@ -41,15 +41,36 @@ export class MouseTool {
   }
 
   leftClick(event) {
-    console.log(this.mode);
     if (this.mode === MouseTool.MODES[0] || this.mode === MouseTool.MODES[2]) {
       console.log(`target ${event.target.style}`);
       event.target.style.fill = this.currentColor;
     } else if (this.mode === MouseTool.MODES[1]) {
       console.log(`currentTarget ${event.currentTarget.style}`);
-      event.currentTarget.childNodes.forEach(
-        (node) => (node.style.fill = this.currentColor)
-      );
+      event.currentTarget.childNodes.forEach((node) => {
+        node.style.fill = this.currentColor;
+      });
+    }
+  }
+
+  mouseOver(event) {
+    if (this.mode === MouseTool.MODES[1]) {
+      event.currentTarget.childNodes.forEach((node) => {
+        node.style.stroke = "#ffffff";
+      });
+    }
+    if (
+      this.mode === MouseTool.MODES[2] &&
+      (event.buttons === 1 || event.buttons === 3)
+    ) {
+      event.target.style.fill = this.currentColor;
+    }
+  }
+
+  mouseLeave(event) {
+    if (this.mode === MouseTool.MODES[1]) {
+      event.currentTarget.childNodes.forEach((node) => {
+        node.style.stroke = "none";
+      });
     }
   }
 

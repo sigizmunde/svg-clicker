@@ -87,6 +87,8 @@ function addSvgListeners(objectEl) {
   let els = svgDoc.querySelectorAll("g:not(#svg-back)");
   for (const el of els) {
     el.addEventListener("click", (event) => controller.leftClick(event));
+    el.addEventListener("mouseover", (event) => controller.mouseOver(event));
+    el.addEventListener("mouseleave", (event) => controller.mouseLeave(event));
     // cause callback has no this so function inside function needed
     console.log("found <g> element");
   }
