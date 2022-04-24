@@ -42,6 +42,7 @@ const refs = {
   openMainMenuBtn: document.querySelector("#menu-open"),
   mainMenu: document.querySelector(".main-menu"),
   changePicBtn: document.querySelector("#change-pic-btn"),
+  savePicBtn: document.querySelector("#save-pic-btn"),
   menuContainer: document.querySelector(".menu-container"),
   backdrop: document.querySelector(".backdrop"),
 
@@ -89,6 +90,11 @@ updateColorPanel(0);
 refs.changePicBtn.addEventListener("click", (e) => {
   e.preventDefault();
   showPictureList(pictureGallery);
+});
+
+refs.savePicBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  makeFile("kolyornytsia.svg");
 });
 
 refs.minimizeBtn.addEventListener("click", onMinimizeBtnClick);
@@ -201,6 +207,29 @@ function showPictureList(picArr) {
     });
   });
   showModal();
+}
+
+function makeFile(name) {
+  let file;
+  const fileData = [];
+  fileData.push(refs.svgimage.contentDocument.querySelector("svg").outerHTML);
+  let properties = { type: "text/plain" };
+  try {
+    file = new File(fileData, name, properties);
+  } catch (e) {
+    file = new Blob(data, properties);
+  }
+  const url = URL.createObjectURL(file);
+  // console.log(file);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "kolyornytsia.svg";
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(function () {
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  }, 0);
 }
 
 function sleep(milliseconds) {
