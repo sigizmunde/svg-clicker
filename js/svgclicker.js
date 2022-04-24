@@ -1,6 +1,11 @@
 import { PalletteArchive } from "./classes/pallette.js";
 import { MouseTool } from "./classes/mousetools.js";
 
+const pictureGallery = [
+  { name: "Палай!", link: "./images/ub5.svg" },
+  { name: "Pacifico", link: "./images/5-04.svg" },
+];
+
 const colorSchemesArr = [
   {
     palletteName: "cold violet",
@@ -34,6 +39,9 @@ const colorSchemesArr = [
 const refs = {
   body: document.querySelector("body"),
   svgimage: document.getElementById("patternsvg"),
+  openMainMenuBtn: document.querySelector("#menu-open"),
+  mainMenu: document.querySelector(".main-menu"),
+  changePicBtn: document.querySelector("#change-pic-btn"),
   menuContainer: document.querySelector(".menu-container"),
   backdrop: document.querySelector(".backdrop"),
 
@@ -53,6 +61,16 @@ const controller = new MouseTool(refs.groupBtn, refs.hoverBtn);
 //   curColor: "#ffffff",
 // };
 
+// ========= mobile menu ==================================
+refs.openMainMenuBtn.addEventListener("click", () =>
+  refs.mainMenu.classList.toggle("is-open")
+);
+
+refs.mainMenu.addEventListener("click", () =>
+  refs.mainMenu.classList.toggle("is-open")
+);
+// ========================================================
+
 addSvgListeners(refs.svgimage);
 
 refs.svgimage.addEventListener("load", function () {
@@ -67,6 +85,11 @@ const myColors = new PalletteArchive();
 myColors.addPallettes(colorSchemesArr);
 
 updateColorPanel(0);
+
+refs.changePicBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  showPictureList(pictureGallery);
+});
 
 refs.minimizeBtn.addEventListener("click", onMinimizeBtnClick);
 refs.colorListBtn.addEventListener("click", onColorListBtnClick);
@@ -151,6 +174,33 @@ function updateColorPanel(palletteID) {
     colorBox.addEventListener("click", onColorClick);
   }
   setCurrentColor(refs.colorMenu[0].children[0].style.backgroundColor);
+}
+
+function showPictureList(picArr) {
+  const header = document.createElement("h2");
+  header.classList.add("pallette-menu__header");
+  header.innerText = "Choose a pisture:";
+  const listUl = document.createElement("ul");
+  listUl.classList.add("js-pallette-list");
+  listUl.style =
+    "display: block; margin: 0; background-color: white; color: black; padding: 0; list-style: none;";
+  picArr.forEach((pic) => {
+    const el = document.createElement("li");
+    el.classList.add("js-svg-name");
+    el.innerText = pic.name;
+    el.dataset.link = pic.link;
+    listUl.append(el);
+  });
+  refs.menuContainer.replaceChildren(header, listUl);
+  document.querySelectorAll(".js-svg-name").forEach((item) => {
+    item.classList.add("link");
+    item.addEventListener("click", (event) => {
+      const picLink = event.target.dataset.link;
+      refs.svgimage.setAttribute("data", picLink);
+      hideModal();
+    });
+  });
+  showModal();
 }
 
 function sleep(milliseconds) {

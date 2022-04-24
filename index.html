@@ -6,9 +6,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./css/modern-normalize.css" />
     <link rel="stylesheet" href="./css/style.css" />
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Philosopher:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <title lang="ua">Кольорниця</title>
   </head>
   <body>
+    <header>
+      <h1 class="logo__header" lang="ua">Кольорниця</h1>
+      <div class="main-menu">
+        <ul class="main-menu__items">
+          <li><a href="./" id="change-pic-btn">change picture</a></li>
+          <li><a href="./">download picture</a></li>
+          <li>
+            <a
+              href="https://www.comebackalive.in.ua/uk/donate"
+              rel="noopener noreferrer nofollow"
+              target="_blank"
+              >donate Ukrainian army</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="main-menu__open-btn" id="menu-open"><span>=</span></div>
+    </header>
+
     <div class="image-container">
       <object
         data=""
@@ -17,19 +42,20 @@
         width="100%"
         height="100%"
       ></object>
+      <div class="color-menu minimized">
+        <div class="js-minimize-btn menu-btn">&gt;</div>
+        <div class="js-color-list-btn menu-btn">=</div>
+        <div class="js-current-color" style="background-color: white"></div>
+        <h2 class="color-menu__header">Color pallette</h2>
+        <ul class="js-color-pallette"></ul>
+        <p class="pallette-name"></p>
+      </div>
+      <div class="tools-menu">
+        <div class="js-group-tool-btn menu-btn menu-btn__relative">g</div>
+        <div class="js-hover-tool-btn menu-btn menu-btn__relative">h</div>
+      </div>
     </div>
-    <div class="color-menu">
-      <div class="js-minimize-btn menu-btn">&lt;</div>
-      <div class="js-color-list-btn menu-btn">=</div>
-      <div class="js-current-color" style="background-color: white"></div>
-      <h2 class="color-menu__header">Color pallette</h2>
-      <ul class="js-color-pallette"></ul>
-      <p class="pallette-name"></p>
-    </div>
-    <div class="tools-menu">
-      <div class="js-group-tool-btn menu-btn menu-btn__relative">g</div>
-      <div class="js-hover-tool-btn menu-btn menu-btn__relative">h</div>
-    </div>
+
     <div class="backdrop is-hidden"></div>
     <div class="menu-container modal is-hidden"></div>
     <script src="./js/svgclicker.js" type="module"></script>
