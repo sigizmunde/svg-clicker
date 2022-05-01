@@ -4,7 +4,7 @@ import { MouseTool } from "./classes/mousetools.js";
 const pictureGallery = [
   { name: "Палай!", link: "./images/ub5.svg" },
   { name: "russian ship", link: "./images/ub7.svg" },
-  { name: "Pacifico", link: "./images/5-04.svg" },
+  { name: "Кохайтеся", link: "./images/ub10.svg" },
 ];
 
 const colorSchemesArr = [
