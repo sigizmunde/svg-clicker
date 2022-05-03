@@ -2,7 +2,8 @@ import { PalletteArchive } from "./classes/pallette.js";
 import { MouseTool } from "./classes/mousetools.js";
 
 const pictureGallery = [
-  { name: "Палай!", link: "./images/ub5.svg" },
+  { name: "Палай!", link: "./images/ub11.svg" },
+  { name: "Палай! — pattern", link: "./images/ub5.svg" },
   { name: "russian ship", link: "./images/ub7.svg" },
   { name: "Кохайтеся", link: "./images/ub10.svg" },
 ];
@@ -79,7 +80,7 @@ refs.svgimage.addEventListener("load", function () {
   addSvgListeners(refs.svgimage);
 });
 
-refs.svgimage.setAttribute("data", "./images/ub5.svg");
+refs.svgimage.setAttribute("data", "./images/ub11.svg");
 
 // refs.body.addEventListener("click", addSvgListeners);
 
@@ -119,7 +120,7 @@ function addSvgListeners(objectEl) {
     el.addEventListener("click", (event) => controller.leftClick(event));
     el.addEventListener("mouseover", (event) => controller.mouseOver(event));
     el.addEventListener("mouseleave", (event) => controller.mouseLeave(event));
-    // cause callback has no this so function inside function needed
+    
     console.log("found <g> element");
   }
   console.log("...done");
