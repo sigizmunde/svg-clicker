@@ -1,5 +1,5 @@
 import { PalletteArchive } from "./classes/pallette.js";
-import { MouseTool } from "./classes/mousetools.js";
+import { Controller } from "./classes/controller.js";
 
 const pictureGallery = [
   { name: "Палай!", link: "./images/ub11.svg" },
@@ -41,6 +41,7 @@ const colorSchemesArr = [
 const refs = {
   body: document.querySelector("body"),
   svgimage: document.getElementById("patternsvg"),
+  imageContainer: document.querySelector(".image-container"),
   openMainMenuBtn: document.querySelector("#menu-open"),
   mainMenu: document.querySelector(".main-menu"),
   changePicBtn: document.querySelector("#change-pic-btn"),
@@ -50,6 +51,8 @@ const refs = {
 
   groupBtn: document.querySelector(".js-group-tool-btn"),
   hoverBtn: document.querySelector(".js-hover-tool-btn"),
+  undoBtn: document.querySelector(".js-undo-tool-btn"),
+  revertBtn: document.querySelector(".js-revert-tool-btn"),
 
   colorPanel: document.querySelector(".color-menu"),
   minimizeBtn: document.querySelector(".js-minimize-btn"),
@@ -58,11 +61,23 @@ const refs = {
   colorMenu: null,
 };
 
-const controller = new MouseTool(refs.groupBtn, refs.hoverBtn);
+const controller = new Controller(
+  refs.groupBtn,
+  refs.hoverBtn,
+  refs.undoBtn,
+  refs.revertBtn
+);
 
-// const val = {
-//   curColor: "#ffffff",
-// };
+window.addEventListener("keydown", (e) => controller.keyboardCommands(e));
+
+///////////////
+///////////////
+////doesn't work here
+///////////////
+///////////////
+refs.svgimage.addEventListener("keydown", (e) =>
+  controller.keyboardCommands(e)
+);
 
 // ========= mobile menu ==================================
 refs.openMainMenuBtn.addEventListener("click", () =>
@@ -120,7 +135,7 @@ function addSvgListeners(objectEl) {
     el.addEventListener("click", (event) => controller.leftClick(event));
     el.addEventListener("mouseover", (event) => controller.mouseOver(event));
     el.addEventListener("mouseleave", (event) => controller.mouseLeave(event));
-    
+
     console.log("found <g> element");
   }
   console.log("...done");

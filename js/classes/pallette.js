@@ -1,4 +1,3 @@
-// ========================= pallette class start ====================
 export class PalletteArchive {
   constructor() {
     this.palletteArr = [];
@@ -86,4 +85,3 @@ export class PalletteArchive {
     return listUl;
   }
 }
-// ========================= pallette class end ======================
