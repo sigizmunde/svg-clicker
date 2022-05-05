@@ -70,15 +70,6 @@ const controller = new Controller(
 
 window.addEventListener("keydown", (e) => controller.keyboardCommands(e));
 
-///////////////
-///////////////
-////doesn't work here
-///////////////
-///////////////
-refs.svgimage.addEventListener("keydown", (e) =>
-  controller.keyboardCommands(e)
-);
-
 // ========= mobile menu ==================================
 refs.openMainMenuBtn.addEventListener("click", () =>
   refs.mainMenu.classList.toggle("is-open")
@@ -130,6 +121,7 @@ function addSvgListeners(objectEl) {
   console.log("adding SVG listeners...");
 
   let svgDoc = objectEl.contentDocument;
+  svgDoc.addEventListener("keydown", event => controller.keyboardCommands(event));
   let els = svgDoc.querySelectorAll("g:not(#svg-back)");
   for (const el of els) {
     el.addEventListener("click", (event) => controller.leftClick(event));

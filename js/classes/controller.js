@@ -84,6 +84,7 @@ export class Controller {
       });
       this.backHistory.pushStack(newHistoryState);
     }
+    this.returnFocus();
   }
 
   mouseOver(event) {
@@ -112,6 +113,7 @@ export class Controller {
         node.style.stroke = "none";
       });
     }
+    this.returnFocus();
   }
 
   gBtnClick() {
@@ -173,7 +175,7 @@ export class Controller {
   }
 
   keyboardCommands(event) {
-    console.log("key pressed ", event.code);
+    // console.log("key pressed ", event.code);
 
     if (event.ctrlKey && event.code === "KeyZ" && !event.shiftKey) {
       this.undoChange();
@@ -181,5 +183,10 @@ export class Controller {
     if (event.ctrlKey && event.shiftKey && event.code === "KeyZ") {
       this.revertChange();
     }
+  }
+
+  returnFocus() {
+    window.focus(); //this lets window listen to keyboard events
+    //this is not needed any more since keyboard listeners added to object.contentDocument
   }
 }
