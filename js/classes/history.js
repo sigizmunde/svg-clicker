@@ -8,7 +8,7 @@ export class History {
 
   pushStack(state) {
     try {
-      console.log("history push ", state);
+      // console.log("history push ", state);
       this.#stack.push(state);
     } catch (err) {
       console.error(err);

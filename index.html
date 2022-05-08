@@ -47,23 +47,37 @@
         width="100%"
         height="100%"
       ></object>
-      <div class="color-menu minimized">
-        <div class="js-minimize-btn menu-btn">&gt;</div>
-        <div class="js-color-list-btn menu-btn">=</div>
-        <div class="js-current-color" style="background-color: white"></div>
-        <h2 class="color-menu__header">Color pallette</h2>
-        <ul class="js-color-pallette"></ul>
-        <p class="pallette-name"></p>
-      </div>
-      <div class="tools-menu">
-        <div class="js-group-tool-btn menu-btn menu-btn__relative">g</div>
-        <div class="js-hover-tool-btn menu-btn menu-btn__relative">
-          <svg class="menu__icon">
-            <use href="./images/symbol-defs.svg#icon-paint-format"></use>
-          </svg>
+      <div class="menu__container">
+        <div class="color-menu minimized">
+          <div class="js-minimize-btn menu-btn">&gt;</div>
+          <div class="js-color-list-btn menu-btn"><svg class = "btn__icon"><use href="./images/symbol-defs.svg#icon-colours"></svg></svg></div>
+          <div class="js-current-color" style="background-color: white"></div>
+          <h2 class="color-menu__header">Color pallette</h2>
+          <ul class="js-color-pallette"></ul>
+          <p class="pallette-name"></p>
         </div>
-        <div class="js-undo-tool-btn menu-btn menu-btn__relative">&lt-</div>
-        <div class="js-revert-tool-btn menu-btn menu-btn__relative">-&gt</div>
+        <div class="tools-menu minimized">
+          <div class="js-group-tool-btn menu-btn menu-btn__relative">
+            <svg class="btn__icon">
+              <use href="./images/symbol-defs.svg#icon-make-group"></use>
+            </svg>
+          </div>
+          <div class="js-hover-tool-btn menu-btn menu-btn__relative">
+            <svg class="btn__icon">
+              <use href="./images/symbol-defs.svg#icon-paint-format"></use>
+            </svg>
+          </div>
+          <div class="js-undo-tool-btn menu-btn menu-btn__relative">
+            <svg class="btn__icon">
+              <use href="./images/symbol-defs.svg#icon-undo"></use>
+            </svg>
+          </div>
+          <div class="js-revert-tool-btn menu-btn menu-btn__relative">
+            <svg class="btn__icon">
+              <use href="./images/symbol-defs.svg#icon-redo"></use>
+            </svg>
+          </div>
+        </div>
       </div>
     </div>
 

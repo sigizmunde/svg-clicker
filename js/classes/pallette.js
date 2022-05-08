@@ -54,7 +54,7 @@ export class PalletteArchive {
           .toString(16)
           .padStart(6, "0")}; --color-box-width: calc((100% / ${
           currentPallette.colorNumArr.length
-        }) - 12px); --color-box-height: calc((120px / ${
+        }) - 8px); --color-box-height: calc((120px / ${
           currentPallette.colorNumArr.length
         }) - 5px);`;
         colorUl.append(colorLi);

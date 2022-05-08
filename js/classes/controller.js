@@ -64,7 +64,7 @@ export class Controller {
       this.mode === Controller.MODES[0] ||
       this.mode === Controller.MODES[2]
     ) {
-      console.log(`target ${event.target.style}`);
+      // console.log(`target ${event.target.style}`);
       this.backHistory.pushStack([
         {
           element: event.target,
@@ -73,7 +73,7 @@ export class Controller {
       ]);
       event.target.style.fill = this.currentColor;
     } else if (this.mode === Controller.MODES[1]) {
-      console.log(`currentTarget ${event.currentTarget.style}`);
+      // console.log(`currentTarget ${event.currentTarget.style}`);
       const newHistoryState = [];
       event.currentTarget.childNodes.forEach((node) => {
         newHistoryState.push({
@@ -119,11 +119,11 @@ export class Controller {
   gBtnClick() {
     this.buttons.groupBtn.classList.toggle("is-active");
     if (this.buttons.groupBtn.classList.contains("is-active")) {
-      console.log("group on");
+      // console.log("group on");
       this.buttons.hoverBtn.classList.remove("is-active");
       this.mode = Controller.MODES[1];
     } else {
-      console.log("single");
+      // console.log("single");
       this.mode = Controller.MODES[0];
     }
   }
@@ -163,9 +163,9 @@ export class Controller {
         return { element: el.element, fill: el.element.style.fill };
       });
       state.forEach((el) => {
-        console.log(el.element.style.fill, el.fill);
+        // console.log(el.element.style.fill, el.fill);
         el.element.style["fill"] = el.fill;
-        console.log("changed to ", el.element.style.fill);
+        // console.log("changed to ", el.element.style.fill);
       });
       return newState;
     } catch (err) {
