@@ -5,6 +5,7 @@ const pictureGallery = [
   { name: "Палай!", link: "./images/ub11.svg" },
   { name: "Палай! — pattern", link: "./images/ub5.svg" },
   { name: "russian ship", link: "./images/ub7.svg" },
+  { name: "Святокиця", link: "./images/ub12.svg" },
   { name: "Кохайтеся", link: "./images/ub10.svg" },
 ];
 
@@ -121,7 +122,9 @@ function addSvgListeners(objectEl) {
   console.log("adding SVG listeners...");
 
   let svgDoc = objectEl.contentDocument;
-  svgDoc.addEventListener("keydown", event => controller.keyboardCommands(event));
+  svgDoc.addEventListener("keydown", (event) =>
+    controller.keyboardCommands(event)
+  );
   let els = svgDoc.querySelectorAll("g:not(#svg-back)");
   for (const el of els) {
     el.addEventListener("click", (event) => controller.leftClick(event));
