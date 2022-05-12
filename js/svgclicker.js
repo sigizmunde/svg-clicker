@@ -11,6 +11,10 @@ const pictureGallery = [
 
 const colorSchemesArr = [
   {
+    palletteName: "basic pallette",
+    colorNumArr: [0x3498db, 0xf1c40f, 0xe74c3c, 0x2ecc71, 0xecf0f1, 0x2c3e50],
+  },
+  {
     palletteName: "cold violet",
     colorNumArr: [0x56b6c4, 0x9567e0, 0x6f3096, 0x06114f, 0xf7a579],
   },
