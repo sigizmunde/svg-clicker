@@ -471,6 +471,11 @@ header {
   border-radius: 12px;
 }
 
+.js-pallette-list {
+  max-height: 65vh;
+  overflow: auto;
+}
+
 .pallette-menu__header {
   display: block;
   margin-bottom: 16px;
