@@ -89,6 +89,7 @@ addSvgListeners(refs.svgimage);
 
 refs.svgimage.addEventListener("load", function () {
   addSvgListeners(refs.svgimage);
+  controller.clearHistory();
 });
 
 refs.svgimage.setAttribute("data", "./images/ub11.svg");

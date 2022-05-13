@@ -8,7 +8,6 @@ export class History {
 
   pushStack(state) {
     try {
-      // console.log("history push ", state);
       this.#stack.push(state);
     } catch (err) {
       console.error(err);
@@ -19,7 +18,7 @@ export class History {
   }
 
   popStack() {
-    return this.#stack.length > 0 ? this.#stack.pop() : 0;
+    return this.#stack.length > 0 ? this.#stack.pop() : null;
   }
 
   watchTheLimit(limit) {
@@ -27,5 +26,9 @@ export class History {
       this.#stack.shift();
       this.watchTheLimit(limit);
     }
+  }
+
+  clearStack() {
+    this.#stack = [];
   }
 }

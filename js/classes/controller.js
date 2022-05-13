@@ -65,6 +65,7 @@ export class Controller {
       this.mode === Controller.MODES[2]
     ) {
       // console.log(`target ${event.target.style}`);
+      if (event.target.style.fill === this.currentColor) return 0;
       this.backHistory.pushStack([
         {
           element: event.target,
@@ -72,17 +73,21 @@ export class Controller {
         },
       ]);
       event.target.style.fill = this.currentColor;
+      return 1;
     } else if (this.mode === Controller.MODES[1]) {
       // console.log(`currentTarget ${event.currentTarget.style}`);
       const newHistoryState = [];
       event.currentTarget.childNodes.forEach((node) => {
+        if (node.style.fill === this.currentColor) return;
         newHistoryState.push({
           element: node,
           fill: node.style.fill,
         });
         node.style.fill = this.currentColor;
       });
-      this.backHistory.pushStack(newHistoryState);
+      if (newHistoryState.length) {
+        this.backHistory.pushStack(newHistoryState);
+      }
     }
     this.returnFocus();
   }
@@ -97,6 +102,7 @@ export class Controller {
       this.mode === Controller.MODES[2] &&
       (event.buttons === 1 || event.buttons === 3)
     ) {
+      if (event.target.style.fill === this.currentColor) return 0;
       this.backHistory.pushStack([
         {
           element: event.target,
@@ -172,6 +178,11 @@ export class Controller {
       console.error(err);
       return 0;
     }
+  }
+
+  clearHistory() {
+    this.forwardHistory.clearStack();
+    this.backHistory.clearStack();
   }
 
   keyboardCommands(event) {
