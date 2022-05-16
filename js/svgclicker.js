@@ -4,6 +4,7 @@ import { Controller } from "./classes/controller.js";
 const pictureGallery = [
   { name: "Палай!", link: "./images/ub11.svg" },
   { name: "Палай! — pattern", link: "./images/ub5.svg" },
+  { name: "Kyiv Santa", link: "./images/ub15.svg" },
   { name: "russian ship", link: "./images/ub7.svg" },
   { name: "Святокиця", link: "./images/ub12.svg" },
   { name: "Кохайтеся", link: "./images/ub10.svg" },
