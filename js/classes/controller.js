@@ -93,32 +93,33 @@ export class Controller {
   }
 
   mouseOver(event) {
+    if (this.mode === Controller.MODES[0]) {
+      event.target.style.stroke = "#ffffff";
+    }
     if (this.mode === Controller.MODES[1]) {
       event.currentTarget.childNodes.forEach((node) => {
         node.style.stroke = "#ffffff";
       });
     }
-    if (
-      this.mode === Controller.MODES[2] &&
-      (event.buttons === 1 || event.buttons === 3)
-    ) {
-      if (event.target.style.fill === this.currentColor) return 0;
-      this.backHistory.pushStack([
-        {
-          element: event.target,
-          fill: event.target.style.fill,
-        },
-      ]);
-      event.target.style.fill = this.currentColor;
+    if (this.mode === Controller.MODES[2]) {
+      event.target.style.stroke = "#ffffff";
+      if (event.buttons === 1 || event.buttons === 3) {
+        if (event.target.style.fill === this.currentColor) return 0;
+        this.backHistory.pushStack([
+          {
+            element: event.target,
+            fill: event.target.style.fill,
+          },
+        ]);
+        event.target.style.fill = this.currentColor;
+      }
     }
   }
 
   mouseLeave(event) {
-    if (this.mode === Controller.MODES[1]) {
-      event.currentTarget.childNodes.forEach((node) => {
-        node.style.stroke = "none";
-      });
-    }
+    event.currentTarget.childNodes.forEach((node) => {
+      node.style.stroke = "none";
+    });
     this.returnFocus();
   }
 
