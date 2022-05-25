@@ -218,13 +218,16 @@ function showPictureList(picArr) {
   refs.menuContainer.replaceChildren(header, listUl);
   document.querySelectorAll(".js-svg-name").forEach((item) => {
     item.classList.add("link");
-    item.addEventListener("click", (event) => {
-      const picLink = event.target.dataset.link;
-      refs.svgimage.setAttribute("data", picLink);
-      hideModal();
-    });
+    item.addEventListener("click", (event) =>
+      changePicture(event.target.dataset.link)
+    );
   });
   showModal();
+}
+
+function changePicture(picLink) {
+  refs.svgimage.setAttribute("data", picLink);
+  hideModal();
 }
 
 function makeFile(name) {

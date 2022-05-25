@@ -67,6 +67,12 @@ body {
   margin: var(--header-height) auto 0;
 }
 
+@media screen and (max-width: 768px) {
+  .image-container {
+    margin-left: 42px;
+  }
+}
+
 header {
   position: fixed;
   z-index: 100;
