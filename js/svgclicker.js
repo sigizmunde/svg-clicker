@@ -219,10 +219,43 @@ function showPictureList(picArr) {
   document.querySelectorAll(".js-svg-name").forEach((item) => {
     item.classList.add("link");
     item.addEventListener("click", (event) =>
-      changePicture(event.target.dataset.link)
+      changePictureAttempt(event.target.dataset.link)
     );
   });
   showModal();
+}
+
+function changePictureAttempt(picLink) {
+  if (controller.backHistory.getLength()) {
+    const warning = createWarningContent(
+      "Your changes to the current picture will be lost. Load new picture anyway?",
+      () => changePicture(picLink),
+      hideModal
+    );
+    refs.menuContainer.replaceChildren(warning);
+    return;
+  }
+  changePicture(picLink);
+}
+
+function createWarningContent(message, funcYes, funcNo) {
+  const warning = document.createElement("div");
+  warning.classList.add("js-warning-alert");
+  warning.innerHTML = `<p>${message}</p>`;
+
+  const yes = document.createElement("p");
+  yes.classList.add("js-warning-alert__yes");
+  yes.innerText = "Yes";
+  yes.addEventListener("click", funcYes);
+
+  const no = document.createElement("p");
+  no.classList.add("js-warning-alert__no");
+  no.innerText = "No";
+  no.addEventListener("click", funcNo);
+
+  warning.append(yes, no);
+
+  return warning;
 }
 
 function changePicture(picLink) {

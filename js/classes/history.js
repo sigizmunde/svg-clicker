@@ -31,4 +31,8 @@ export class History {
   clearStack() {
     this.#stack = [];
   }
+
+  getLength() {
+    return this.#stack.length;
+  }
 }

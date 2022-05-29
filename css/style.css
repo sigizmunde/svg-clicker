@@ -491,6 +491,26 @@ header {
   color: var(--color-accent);
 }
 
+.js-warning-alert {
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.js-warning-alert__yes,
+.js-warning-alert__no {
+  display: inline-block;
+  margin: 25px 25px 0;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.js-warning-alert__yes:hover,
+.js-warning-alert__no:hover {
+  color: var(--color-accent);
+}
+
 /* ======================= utility ====================================== */
 
 .link {
