@@ -88,7 +88,7 @@ refs.mainMenu.addEventListener('click', () =>
 );
 // ========================================================
 
-// refs.svgimage.setAttribute('data', './images/ub11.svg');
+refs.svgimage.setAttribute('data', pictureGallery[0].link);
 
 addSvgListeners(refs.svgimage);
 
