@@ -2,13 +2,15 @@ import { PalletteArchive } from './classes/pallette.js';
 import { Controller } from './classes/controller.js';
 
 const pictureGallery = [
-  { name: 'Палай!', link: './images/ub11.svg' },
-  { name: 'Палай! — pattern', link: './images/ub5.svg' },
-  { name: 'Kyiv Santa', link: './images/ub15.svg' },
-  { name: 'russian ship', link: './images/ub7.svg' },
-  { name: 'Святокиця', link: './images/ub12.svg' },
-  { name: 'Кохайтеся', link: './images/ub10.svg' },
+  { name: 'Палай!', link: require('../images/ub11.svg') },
+  { name: 'Палай! — pattern', link: require('../images/ub5.svg') },
+  { name: 'Kyiv Santa', link: require('../images/ub15.svg') },
+  { name: 'russian ship', link: require('../images/ub7.svg') },
+  { name: 'Святокиця', link: require('../images/ub12.svg') },
+  { name: 'Кохайтеся', link: require('../images/ub10.svg') },
 ];
+
+//   link: require(link) - this makes link for Parcel
 
 const colorSchemesArr = [
   {
